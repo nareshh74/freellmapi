@@ -1,18 +1,25 @@
 services:
   freellmapi:
-    image: ghcr.io/tashfeenahmed/freellmapi:latest
+    image: freellmapi-otel:local
     build:
-      context: .
+      context: ./deploy/otel
       dockerfile: Dockerfile
     env_file:
       - .env
     environment:
       NODE_ENV: production
       PORT: 3001
+      FREEAPI_CONFIG_PATH: /app/freellmapi.config.json
+      OTEL_SERVICE_NAME: freellmapi
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+      OTEL_EXPORTER_OTLP_TIMEOUT: "2000"
       # Settings → Check for updates → "Update now". Only active when the
       # `autoupdate` profile below runs and WATCHTOWER_TOKEN is set in .env.
       FREELLMAPI_SELF_UPDATE_URL: http://watchtower:8080
       FREELLMAPI_SELF_UPDATE_TOKEN: ${WATCHTOWER_TOKEN:-}
+    networks:
+      - default
+      - otel-net
     labels:
       # The updater below only ever touches containers carrying BOTH labels.
       # The scope keeps it off containers other stacks have opted into their
@@ -25,6 +32,7 @@ services:
       - "${HOST_BIND:-127.0.0.1}:${PORT:-3001}:3001"
     volumes:
       - freellmapi-data:/app/server/data
+      - ./freellmapi.config.json:/app/freellmapi.config.json:ro
     # Makes `host.docker.internal` resolve to the host from inside the
     # container. Docker Desktop provides it already; plain Docker on Linux does
     # not, and without it the documented way to reach a proxy running on the
@@ -70,3 +78,7 @@ services:
 
 volumes:
   freellmapi-data:
+
+networks:
+  otel-net:
+    external: true
