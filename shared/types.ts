@@ -133,6 +133,7 @@ export type Platform =
   // Self-hosted TTS: shared 30K tokens/day and 1K API requests/month, no card.
   // Model rows arrive only through the signed, freshness-gated catalog.
   | 'freeai'
+  | 'roboflow'
   | 'blaze'
   // Lucidity Composite, Api.Airforce and DreamPrompting expose daily free
   // allowances; Waterfall and Logfare publish community / fair-use tiers.
@@ -414,6 +415,10 @@ export interface ApiKey {
   label: string;
   maskedKey: string;
   baseUrl: string | null;
+  /** Upstream API request base URL for this key's provider or custom endpoint (#2020).
+   *  Null when the provider has no single static endpoint URL (or embeds part of
+   *  the credential in its path). */
+  apiUrl?: string | null;
   /** Optional custom-endpoint group label (#1176); null = legacy single
    *  "Custom" group. Only set on platform='custom' rows. */
   groupLabel?: string | null;
@@ -464,7 +469,14 @@ export interface ApiKey {
   /** Only sent when autoHealthCheck is false: how many of the provider's
    *  models this install can route to (0 = nothing to serve yet). */
   modelsAvailable?: number;
+  /** Only sent when autoHealthCheck is false: why the key is never probed
+   *  (#1545). 'forbidden' = the provider disallows automated checks (LLMTR,
+   *  SerpSearch); 'quota' = no check exists that spends nothing (Free.ai). */
+  keyCheckUnavailable?: KeyCheckUnavailableReason;
 }
+
+/** Why a provider's keys are never probed by the health checker (#1545). */
+export type KeyCheckUnavailableReason = 'forbidden' | 'quota';
 
 // ---- Fallback Config ----
 

@@ -21,6 +21,7 @@ export class FreeAiProvider extends BaseProvider {
   readonly supportsChat = false;
   readonly platform = 'freeai' as const;
   readonly name = 'Free.ai';
+  override get apiBaseUrl(): string { return FREEAI_BASE_URL; }
 
   // No published endpoint distinguishes genuine from bogus keys. Skip
   // scheduled health probes instead of persisting an inconclusive error.
@@ -35,7 +36,8 @@ export class FreeAiProvider extends BaseProvider {
     // None proves authentication. Do not burn quota or mark a bogus key valid.
     // The existing health service preserves unknown/healthy state on an
     // inconclusive probe, so a configured key can still serve normal requests.
-    throw new Error('Free.ai has no verified credential-validation endpoint; key validity is unknown (no quota spent)');
+    // #1545: worded as information, not as a fault with the key.
+    throw new Error("Free.ai can't check a key without spending quota, so key validity is unknown until it serves its first request (no quota spent)");
   }
 
   async chatCompletion(): Promise<ChatCompletionResponse> {

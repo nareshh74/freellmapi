@@ -4,6 +4,7 @@ import type {
   ChatCompletionChunk,
   ChatToolDefinition,
   ChatToolChoice,
+  KeyCheckUnavailableReason,
   Platform,
 } from '@freellmapi/shared/types.js';
 import type { QuotaObservationContext } from '../services/provider-quota.js';
@@ -266,6 +267,20 @@ export abstract class BaseProvider {
    * true; overridden by subclasses. */
   readonly supportsChat: boolean = true;
 
+  /** Upstream API request base URL for this provider when it has a single
+   *  stable endpoint URL (#2020). Returns null when a provider has no single
+   *  URL or embeds secret credential parts in the path. */
+  get apiBaseUrl(): string | null {
+    return null;
+  }
+
+  /** Per-key override hook for providers whose host depends on the key
+   *  (e.g. Zhipu global vs domestic console, Parallel MCP vs REST). Never
+   *  embed secret credential material in the returned URL. */
+  getApiBaseUrl(_apiKey?: string): string | null {
+    return this.apiBaseUrl;
+  }
+
   abstract chatCompletion(
     apiKey: string,
     messages: ChatMessage[],
@@ -315,6 +330,15 @@ export abstract class BaseProvider {
    * (markKeyHealthyFromRequest) instead of by a probe. */
   get supportsKeyValidation(): boolean {
     return true;
+  }
+
+  /** Why this provider's keys are never probed, or null when they are (#1545).
+   * Most providers without a key check simply have none that spends nothing
+   * ('quota'); a provider that disallows automated checks overrides this with
+   * 'forbidden'. The dashboard shows it as neutral information, never as an
+   * error: the key routes normally and turns healthy on its first request. */
+  get keyCheckUnavailableReason(): KeyCheckUnavailableReason | null {
+    return this.supportsKeyValidation ? null : 'quota';
   }
 
   /** Whether the scheduled health pass may re-validate this provider's keys

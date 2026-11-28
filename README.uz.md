@@ -22,6 +22,7 @@ Bu tarjima ortda qolishi mumkin. Eng so'nggi ma'lumot uchun inglizcha README'ga 
 <p align="center">
   <a href="https://github.com/tashfeenahmed/freellmapi/releases/latest"><img src="repo-assets/badges/macos.svg" height="48" alt="Download for macOS"></a>
   <a href="https://apps.microsoft.com/detail/9PBN6G8K2B7F"><img src="repo-assets/badges/microsoft-store.svg" height="48" alt="Get it from Microsoft Store"></a>
+  <a href="https://github.com/tashfeenahmed/freellmapi/releases/latest"><img src="repo-assets/badges/windows.svg" height="48" alt="Download for Windows"></a>
   <a href="docs/en/install/01-install.md#docker-compose"><img src="repo-assets/badges/docker.svg" height="48" alt="Self-host with Docker"></a>
   <a href="https://play.google.com/store/apps/details?id=co.freellmapi.app"><img src="repo-assets/badges/play-store.svg" height="48" alt="Get it on Google Play"></a>
   <a href="https://apps.apple.com/app/id6804648934"><img src="repo-assets/badges/app-store.svg" height="48" alt="Download on the App Store"></a>
@@ -185,6 +186,8 @@ Qolgan hamma narsa (Docker Compose, lokal ishlab chiqish, deklarativ ishga tushi
 ![FreeLLMAPI desktop ilovasi](repo-assets/desktop.png)
 
 **[Releases'dan yuklab oling](https://github.com/tashfeenahmed/freellmapi/releases/latest)**: har bir relizga macOS `.dmg` va Windows `.exe` o'rnatuvchisi biriktirilgan. Windows'da **[Microsoft Store](https://apps.microsoft.com/detail/9PBN6G8K2B7F)** versiyasini tanlang: u imzolangan, shuning uchun Smart App Control uni bloklamaydi va Store uni o'zi yangilaydi. Akkaunt yoki parol sozlash shart emas: sizga kerak bo'ladigan yagona maxfiy ma'lumot trey popoveridagi birlashtirilgan API kaliti. Manba koddan build qilish bosqichlari va ma'lumotlaringiz qayerda saqlanishi: [docs/en/install/01-install.md#desktop-app](docs/en/install/01-install.md#desktop-app).
+
+**Store’siz Windows:** agar Store ilovani o'rnata olmasa (masalan, "Something went wrong"), [so'nggi reliz](https://github.com/tashfeenahmed/freellmapi/releases/latest)ni oching va `FreeLLMAPI-Setup-<version>.exe` (o'rnatuvchi, o'zi yangilanadi) yoki `FreeLLMAPI-<version>-win.zip` (portativ: arxivni ochib `FreeLLMAPI.exe`ni ishga tushiring) faylini yuklab oling. Ikkalasi ham imzolanmagan, shuning uchun SmartScreen "Windows protected your PC" deb ko'rsatsa, **More info → Run anyway** tugmasini bosing. Smart App Control’da alohida ilova uchun istisno yo'q: agar u bloklasa, Store versiyasidan yoki [Docker](docs/en/install/01-install.md#docker-compose)dan foydalaning.
 
 macOS 12 Monterey yoki undan yangi versiyalar uchun **arm64 (Apple Silicon)** yoki **x64 (Intel)** ni tanlang. Ikkala Mac build'i ZIP ko'rinishida ham yuklab olinadi.
 
@@ -537,6 +540,9 @@ Hissa qo'shuvchilarni juda mamnuniyat bilan kutamiz! Ishlab chiqish jarayoni, PR
 <a href="https://github.com/SHMOUKE"><img src="https://images.weserv.nl/?url=github.com/SHMOUKE.png&w=40&h=40&fit=cover&mask=circle" width="40" alt="@SHMOUKE" /></a>
 <a href="https://github.com/Tushar49"><img src="https://images.weserv.nl/?url=github.com/Tushar49.png&w=40&h=40&fit=cover&mask=circle" width="40" alt="@Tushar49" /></a>
 <a href="https://github.com/Volko61"><img src="https://images.weserv.nl/?url=github.com/Volko61.png&w=40&h=40&fit=cover&mask=circle" width="40" alt="@Volko61" /></a>
+<a href="https://github.com/chuenchen309"><img src="https://images.weserv.nl/?url=github.com/chuenchen309.png&w=40&h=40&fit=cover&mask=circle" width="40" alt="@chuenchen309" /></a>
+<a href="https://github.com/ixABK"><img src="https://images.weserv.nl/?url=github.com/ixABK.png&w=40&h=40&fit=cover&mask=circle" width="40" alt="@ixABK" /></a>
+<a href="https://github.com/zhangsheng377"><img src="https://images.weserv.nl/?url=github.com/zhangsheng377.png&w=40&h=40&fit=cover&mask=circle" width="40" alt="@zhangsheng377" /></a>
 
 ## Ogohlantirish
 
